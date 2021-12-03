@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -16,9 +17,9 @@ public class MainSecond {
         List<String> key = new ArrayList<>();
         List<Integer> value = new ArrayList<>();
 
-        int tracker = 0;
         int horizontal = 0;
         int depth = 0;
+        int aim = 0;
 
         while(scanner.hasNext()) {
             String inputValue = scanner.next();
@@ -32,15 +33,24 @@ public class MainSecond {
         }
 
         for (int i = 0; i < key.size(); i++) {
-            if (key.get(i).equals("forward")) horizontal = horizontal + value.get(i);
-            if (key.get(i).equals("down")) depth = depth + value.get(i);
-            if (key.get(i).equals("up")) depth = depth - value.get(i);
+            if (key.get(i).equals("forward")) {
+                horizontal += value.get(i);
+                depth += aim * value.get(i);
+            }
+            if (key.get(i).equals("down")) {
+                //depth += value.get(i);
+                aim += value.get(i);
+            }
+            if (key.get(i).equals("up")){
+                //depth -= value.get(i);
+                aim -= value.get(i);
+            }
         }
 
-        System.out.println(horizontal);
-        System.out.println(depth);
-
-        System.out.println(tracker = horizontal * depth);
+        System.out.println("Horizontal: " + horizontal);
+        System.out.println("Depth: " + depth);
+        System.out.println("Aim: " + aim);
+        System.out.println("Tracker: " + horizontal * depth);
 
     }
 }
